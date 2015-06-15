@@ -1,12 +1,12 @@
 'use strict';
 
 function EditionInterface(store) {
-  this.store = store;
+    this.store = store;
 }
 
 EditionInterface.prototype.read = require('./actions/read.js');
 EditionInterface.prototype.readJSON = require('./actions/read-json.js');
-EditionInterface.prototype.exists = require( './actions/exists' );
+EditionInterface.prototype.exists = require('./actions/exists');
 EditionInterface.prototype.write = require('./actions/write.js');
 EditionInterface.prototype.writeJSON = require('./actions/write-json.js');
 EditionInterface.prototype.delete = require('./actions/delete.js');
@@ -16,6 +16,6 @@ EditionInterface.prototype.copyTpl = require('./actions/copy-tpl.js');
 EditionInterface.prototype.move = require('./actions/move.js');
 EditionInterface.prototype.commit = require('./actions/commit.js');
 
-exports.create = function (store) {
-  return new EditionInterface(store);
+exports.create = function(store) {
+    return new EditionInterface(store);
 };

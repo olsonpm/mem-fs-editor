@@ -7,49 +7,55 @@ var memFs = require('mem-fs');
 
 var fileA = path.join(__dirname, 'fixtures/file-a.txt');
 
-describe('#read()', function () {
-  beforeEach(function() {
-    var store = memFs.create();
-    this.fs = editor.create(store);
-  });
-
-  it('read the content of a file', function () {
-    var content = this.fs.read(fileA);
-    assert.equal(content, 'foo\n');
-  });
-
-  it('get the buffer content of a file', function () {
-    var content = this.fs.read(fileA, { raw: true });
-    assert(content instanceof Buffer);
-    assert.equal(content.toString(), 'foo\n');
-  });
-
-  it('throws if file does not exist', function () {
-    assert.throws(this.fs.read.bind(this.fs, 'file-who-does-not-exist.txt'));
-  });
-
-  it('throws if file is deleted', function () {
-    this.fs.delete(fileA);
-    assert.throws(this.fs.read.bind(this.fs, 'file-who-does-not-exist.txt'));
-  });
-
-  it('returns defaults as String if file does not exsit and defaults is provided', function () {
-    var content = this.fs.read('file-who-does-not-exist.txt', { defaults: 'foo\n' });
-    assert.equal(content, 'foo\n');
-  });
-
-  it('returns defaults as Buffer if file does not exsit and defaults is provided', function () {
-    var content = this.fs.read('file-who-does-not-exist.txt', {
-      defaults: new Buffer('foo\n'),
-      raw: true
+describe('#read()', function() {
+    beforeEach(function() {
+        var store = memFs.create();
+        this.fs = editor.create(store);
     });
-    assert(content instanceof Buffer);
-    assert.equal(content.toString(), 'foo\n');
-  });
 
-  it('returns defaults if file is deleted', function () {
-    this.fs.delete(fileA);
-    var content = this.fs.read(fileA, { defaults: 'foo' });
-    assert.equal(content, 'foo');
-  });
+    it('read the content of a file', function() {
+        var content = this.fs.read(fileA);
+        assert.equal(content, 'foo\n');
+    });
+
+    it('get the buffer content of a file', function() {
+        var content = this.fs.read(fileA, {
+            raw: true
+        });
+        assert(content instanceof Buffer);
+        assert.equal(content.toString(), 'foo\n');
+    });
+
+    it('throws if file does not exist', function() {
+        assert.throws(this.fs.read.bind(this.fs, 'file-who-does-not-exist.txt'));
+    });
+
+    it('throws if file is deleted', function() {
+        this.fs.delete(fileA);
+        assert.throws(this.fs.read.bind(this.fs, 'file-who-does-not-exist.txt'));
+    });
+
+    it('returns defaults as String if file does not exsit and defaults is provided', function() {
+        var content = this.fs.read('file-who-does-not-exist.txt', {
+            defaults: 'foo\n'
+        });
+        assert.equal(content, 'foo\n');
+    });
+
+    it('returns defaults as Buffer if file does not exsit and defaults is provided', function() {
+        var content = this.fs.read('file-who-does-not-exist.txt', {
+            defaults: new Buffer('foo\n'),
+            raw: true
+        });
+        assert(content instanceof Buffer);
+        assert.equal(content.toString(), 'foo\n');
+    });
+
+    it('returns defaults if file is deleted', function() {
+        this.fs.delete(fileA);
+        var content = this.fs.read(fileA, {
+            defaults: 'foo'
+        });
+        assert.equal(content, 'foo');
+    });
 });
