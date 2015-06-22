@@ -9,6 +9,7 @@ EditionInterface.prototype.readJSON = require('./actions/read-json.js');
 EditionInterface.prototype.exists = require('./actions/exists');
 EditionInterface.prototype.write = require('./actions/write.js');
 EditionInterface.prototype.writeJSON = require('./actions/write-json.js');
+EditionInterface.prototype.mergeJSON = require('./actions/merge-json.js');
 EditionInterface.prototype.append = require('./actions/append.js');
 EditionInterface.prototype.delete = require('./actions/delete.js');
 EditionInterface.prototype.copy = require('./actions/copy.js').copy;
